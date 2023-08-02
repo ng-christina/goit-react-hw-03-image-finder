@@ -9,18 +9,18 @@ class Searchbar extends Component {
     name: '',
   };
   handleChange = evt => {
-    const { value } = evt.currentTarget;
-    this.setState({ name: value });
+    this.setState({ name: evt.currentTarget.value.toLowerCase() });
   };
 
   handleSubmit = e => {
     e.preventDefault();
+
     if (this.state.name.trim() === '') {
       Notiflix.Notify.failure('Please enter search words!');
       return;
     }
     this.props.onSubmit(this.state);
-    this.reset();
+    this.setState({ name: '' });
   };
   reset() {
     this.setState({ name: '' });
